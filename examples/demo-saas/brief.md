@@ -101,12 +101,25 @@ RUN_DATE=2026-04-15
 
 mkdir -p "data/$RUN_DATE"
 
-npx @agent-analytics/cli@0.5.11 insights "$PROJECT_SLUG" --period 7d > "data/$RUN_DATE/insights.txt"
-npx @agent-analytics/cli@0.5.11 pages "$PROJECT_SLUG" --since 7d > "data/$RUN_DATE/pages.txt"
-npx @agent-analytics/cli@0.5.11 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d > "data/$RUN_DATE/funnel.txt"
-npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50 > "data/$RUN_DATE/${PROXY_EVENT}-events.txt"
-npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50 > "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt"
-npx @agent-analytics/cli@0.5.11 experiments list "$PROJECT_SLUG" > "data/$RUN_DATE/experiments.txt"
+run_snapshot_command() {
+  output_file="$1"
+  shift
+  set +e
+  "$@" > "$output_file" 2>&1
+  command_status=$?
+  set -e
+  perl -i -pe 's/\e\[[0-9;]*m//g' "$output_file"
+  if [ "$command_status" -ne 0 ]; then
+    printf '\ncommand_exit_code: %s\n' "$command_status" >> "$output_file"
+  fi
+}
+
+run_snapshot_command "data/$RUN_DATE/insights.txt" npx @agent-analytics/cli@0.5.11 insights "$PROJECT_SLUG" --period 7d
+run_snapshot_command "data/$RUN_DATE/pages.txt" npx @agent-analytics/cli@0.5.11 pages "$PROJECT_SLUG" --since 7d
+run_snapshot_command "data/$RUN_DATE/funnel.txt" npx @agent-analytics/cli@0.5.11 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d
+run_snapshot_command "data/$RUN_DATE/${PROXY_EVENT}-events.txt" npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50
+run_snapshot_command "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt" npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50
+run_snapshot_command "data/$RUN_DATE/experiments.txt" npx @agent-analytics/cli@0.5.11 experiments list "$PROJECT_SLUG"
 ```
 
 ## Live Data Snapshot
