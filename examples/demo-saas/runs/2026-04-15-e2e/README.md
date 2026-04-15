@@ -53,7 +53,7 @@ Use placeholders for your own project and events:
 
 ```bash
 # Run once if this machine or agent runtime is not logged in.
-npx @agent-analytics/cli@0.5.11 login
+npx @agent-analytics/cli@0.5.12 login
 
 PROJECT_SLUG=my-site
 PRIMARY_EVENT=signup
@@ -76,25 +76,25 @@ run_snapshot_command() {
 }
 
 run_snapshot_command "data/$RUN_DATE/insights.txt" \
-  npx @agent-analytics/cli@0.5.11 insights "$PROJECT_SLUG" --period 7d
+  npx @agent-analytics/cli@0.5.12 insights "$PROJECT_SLUG" --period 7d
 run_snapshot_command "data/$RUN_DATE/pages.txt" \
-  npx @agent-analytics/cli@0.5.11 pages "$PROJECT_SLUG" --since 7d
+  npx @agent-analytics/cli@0.5.12 pages "$PROJECT_SLUG" --since 7d
 run_snapshot_command "data/$RUN_DATE/funnel.txt" \
-  npx @agent-analytics/cli@0.5.11 funnel "$PROJECT_SLUG" \
+  npx @agent-analytics/cli@0.5.12 funnel "$PROJECT_SLUG" \
   --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" \
   --since 7d
 run_snapshot_command "data/$RUN_DATE/${PROXY_EVENT}-events.txt" \
-  npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" \
+  npx @agent-analytics/cli@0.5.12 events "$PROJECT_SLUG" \
   --event "$PROXY_EVENT" \
   --days 7 \
   --limit 50
 run_snapshot_command "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt" \
-  npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" \
+  npx @agent-analytics/cli@0.5.12 events "$PROJECT_SLUG" \
   --event "$PRIMARY_EVENT" \
   --days 7 \
   --limit 50
 run_snapshot_command "data/$RUN_DATE/experiments.txt" \
-  npx @agent-analytics/cli@0.5.11 experiments list "$PROJECT_SLUG"
+  npx @agent-analytics/cli@0.5.12 experiments list "$PROJECT_SLUG"
 ```
 
 Then update `brief.md`:
