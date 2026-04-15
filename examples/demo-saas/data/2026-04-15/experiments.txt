@@ -1,0 +1,9 @@
+Agent Analytics experiments for changelogpilot
+
+No active experiments.
+
+Recommended next experiment:
+name: autoresearch_home_20260415
+variants: control,candidate_1,candidate_2
+goal: trial_started
+proxy: hero_cta_click

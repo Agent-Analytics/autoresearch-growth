@@ -81,7 +81,28 @@ Supporting copy:
 
 List the commands, API calls, reports, SQL queries, exports, or pasted data the agent should use before generating variants.
 
-Example command placeholders:
+Agent Analytics CLI example:
+
+```bash
+# Run once if this machine or agent runtime is not logged in.
+npx @agent-analytics/cli@0.5.11 login
+
+PROJECT_SLUG=<project_slug>
+PRIMARY_EVENT=<primary_event>
+PROXY_EVENT=<proxy_event>
+RUN_DATE=$(date +%F)
+
+mkdir -p "data/$RUN_DATE"
+
+npx @agent-analytics/cli@0.5.11 insights "$PROJECT_SLUG" --period 7d > "data/$RUN_DATE/insights.txt"
+npx @agent-analytics/cli@0.5.11 pages "$PROJECT_SLUG" --since 7d > "data/$RUN_DATE/pages.txt"
+npx @agent-analytics/cli@0.5.11 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d > "data/$RUN_DATE/funnel.txt"
+npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50 > "data/$RUN_DATE/${PROXY_EVENT}-events.txt"
+npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50 > "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt"
+npx @agent-analytics/cli@0.5.11 experiments list "$PROJECT_SLUG" > "data/$RUN_DATE/experiments.txt"
+```
+
+Generic command placeholders:
 
 ```bash
 <analytics-command> summary --project <project> --period 7d

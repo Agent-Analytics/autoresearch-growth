@@ -69,6 +69,29 @@ Before generating copy, refresh the data described in `brief.md`.
 
 Use the project's analytics commands exactly as written in the brief. The data source can be a CLI, API, SQL query, exported report, analytics dashboard export, or manually supplied data.
 
+If the project uses Agent Analytics, the normal snapshot shape is:
+
+```bash
+# Run once if this machine or agent runtime is not logged in.
+npx @agent-analytics/cli@0.5.11 login
+
+PROJECT_SLUG=my-site
+PRIMARY_EVENT=signup
+PROXY_EVENT=cta_click
+RUN_DATE=$(date +%F)
+
+mkdir -p "data/$RUN_DATE"
+
+npx @agent-analytics/cli@0.5.11 insights "$PROJECT_SLUG" --period 7d > "data/$RUN_DATE/insights.txt"
+npx @agent-analytics/cli@0.5.11 pages "$PROJECT_SLUG" --since 7d > "data/$RUN_DATE/pages.txt"
+npx @agent-analytics/cli@0.5.11 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d > "data/$RUN_DATE/funnel.txt"
+npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50 > "data/$RUN_DATE/${PROXY_EVENT}-events.txt"
+npx @agent-analytics/cli@0.5.11 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50 > "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt"
+npx @agent-analytics/cli@0.5.11 experiments list "$PROJECT_SLUG" > "data/$RUN_DATE/experiments.txt"
+```
+
+Read the snapshot files, then summarize the useful signals in the `Live Data Snapshot` section of `brief.md` or in scratch notes before starting round 1. The snapshot is the input evidence. `results.tsv` is the round log created by this loop after judging.
+
 Rules:
 
 - Never invent numbers.

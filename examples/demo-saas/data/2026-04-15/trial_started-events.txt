@@ -1,0 +1,13 @@
+Agent Analytics events for changelogpilot
+Event: trial_started
+Days: 7
+Limit: 50
+
+timestamp	path	referrer	device	country
+2026-04-15T08:25:44Z	/signup	https://news.ycombinator.com	desktop	US
+2026-04-15T09:45:03Z	/signup	https://google.com	desktop	GB
+2026-04-15T11:12:20Z	/signup	direct	desktop	US
+2026-04-15T14:07:39Z	/signup	https://linkedin.com	desktop	CA
+2026-04-15T16:55:10Z	/signup	https://github.com	mobile	US
+
+Sample is truncated. Trial quality and paid conversion are not available in this demo.

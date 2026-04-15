@@ -1,0 +1,13 @@
+Agent Analytics pages for changelogpilot
+Range: since 7d
+
+path	entries	exits	bounce_rate	median_time_on_page	median_scroll_depth
+/	1410	1001	71%	22s	31%
+/pricing	220	98	45%	46s	54%
+/signup	88	35	40%	58s	62%
+/docs/github	74	28	38%	71s	68%
+
+Notes:
+- homepage is the main entry point and has the weakest engagement
+- pricing visitors are more engaged than homepage visitors
+- signup page receives limited but qualified traffic

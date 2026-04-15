@@ -1,0 +1,15 @@
+Agent Analytics funnel for changelogpilot
+Steps: page_view,hero_cta_click,trial_started
+Range: since 7d
+
+step	users	conversion_from_previous	conversion_from_start
+page_view	1130	100%	100%
+hero_cta_click	126	11.2%	11.2%
+trial_started	31	24.6%	2.7%
+
+Drop-off:
+- 88.8% of visitors do not click the hero CTA
+- 75.4% of CTA clickers do not start a trial
+
+Interpretation:
+The biggest opportunity is the first hero decision. Optimize for qualified CTA clicks that still preserve trial intent.
