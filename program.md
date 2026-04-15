@@ -24,6 +24,45 @@ round	candidate_a	candidate_b	candidate_ab	winner	borda_a	borda_b	borda_ab	statu
 
 5. If `final_variants.md` already exists, overwrite it only at the end of a completed loop.
 
+## Results Log
+
+`results.tsv` is the append-only round log. It must be tab-separated, not comma-separated.
+
+Create it with exactly this header:
+
+```tsv
+round	candidate_a	candidate_b	candidate_ab	winner	borda_a	borda_b	borda_ab	status	rationale
+```
+
+Columns:
+
+- `round` - integer round number, starting at `1`.
+- `candidate_a` - short label or headline for candidate A.
+- `candidate_b` - short label or headline for candidate B.
+- `candidate_ab` - short label or headline for the synthesis.
+- `winner` - one of `A`, `B`, or `AB`.
+- `borda_a` - total Borda points for A.
+- `borda_b` - total Borda points for B.
+- `borda_ab` - total Borda points for AB.
+- `status` - usually `keep`; use `discard` only for an invalid round and `rerun` when a round must be repeated.
+- `rationale` - one short TSV-safe sentence explaining why the winner advanced.
+
+TSV rules:
+
+- Use literal tab characters between columns.
+- Do not put tabs inside any field.
+- Keep fields one line only.
+- Avoid commas in `rationale` if they make the log harder to skim.
+- Keep candidate fields short; put full copy in `final_variants.md` or scratch notes.
+- After each round, append exactly one row.
+
+Example:
+
+```tsv
+round	candidate_a	candidate_b	candidate_ab	winner	borda_a	borda_b	borda_ab	status	rationale
+1	Know what changed after launch	Turn traffic into the next fix	Ship the test then read the result	AB	1	2	3	keep	AB connected the action to the measured outcome most clearly
+```
+
 ## Data Brief
 
 Before generating copy, refresh the data described in `brief.md`.

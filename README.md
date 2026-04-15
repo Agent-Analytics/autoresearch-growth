@@ -24,6 +24,8 @@ This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresear
 - `results.tsv` - append-only round log template.
 - `final_variants.md` - final output template.
 
+`program.md` defines the exact `results.tsv` header, column meanings, TSV rules, and an example row.
+
 ## Quick Start
 
 1. Fill in `brief.md` with the project, surface, control copy, metrics, and data commands.
