@@ -1,8 +1,18 @@
 # autoresearch-growth
 
-Autoresearch-style growth loops for positioning, landing-page copy, onboarding copy, and experiment candidates.
+Autoresearch-style growth loops for landing pages, onboarding copy, pricing pages, and experiment candidates.
 
-This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresearch), adapted for growth work. The repo is intentionally Markdown-first: a coding agent reads `program.md`, fills in a project brief, runs several critique/revision/judging rounds, and outputs two variants that can be tested against the current control.
+<p align="center">
+  <img src="assets/autoresearch-growth-loop-diagram.jpg" alt="Autoresearch growth loop: data brief, candidate generation, critique, synthesis, blind judging, A/B test, and measured results flowing into the next run." width="100%">
+</p>
+
+This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresearch), adapted for growth work. A coding agent reads `program.md`, studies your product brief and analytics snapshot, runs critique/revision/judging rounds, then outputs two distinct variants ready to test against the current control.
+
+Use any analytics source you want: Agent Analytics, PostHog, GA4, Mixpanel, SQL, CSV exports, product logs, or a hand-written data brief. The loop only needs a clear surface, current control, primary metric, proxy metric, guardrails, and the freshest evidence you can give it.
+
+It works especially well with [Agent Analytics](https://agentanalytics.sh) because agents can pull fresh data through the CLI/API, inspect funnels and events without opening a dashboard, and use experiment data in the next run. If your setup exposes experiment creation through an API, the same loop can move from "generate variants" to "ship, measure, learn, repeat."
+
+This repo is a community template. Bring your own product, your own data, and your own judgment.
 
 ## The Loop
 
@@ -37,9 +47,23 @@ This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresear
 Read program.md and run the growth loop. Use brief.md as the source of truth. Produce final_variants.md with two variants for review.
 ```
 
-## Collect Data With Agent Analytics
+## Bring Analytics Data
 
-`npx` collects the evidence for the run. It does not directly create `results.tsv`.
+The loop can use any analytics export or query result. Put the source commands or pasted reports in `brief.md`, then summarize the evidence under `Live Data Snapshot`.
+
+Good inputs include:
+
+- page views, sessions, bounce, scroll depth, and time on page
+- funnel steps from entry to CTA to signup, checkout, or activation
+- event samples for the primary and proxy metrics
+- current or past experiment results
+- source, device, quality, retention, or revenue notes when available
+
+## Best With Agent Analytics
+
+[Agent Analytics](https://agentanalytics.sh) is built for this workflow: your agent can query live web analytics from the terminal, save a dated snapshot, and feed that evidence into `brief.md`.
+
+`npx` collects the evidence for the run. It does not directly create `results.tsv`; the autoresearch loop creates `results.tsv` as it judges rounds.
 
 The usual flow is:
 
@@ -120,7 +144,11 @@ For private products, keep `brief.md`, `data/`, `results.tsv`, and `final_varian
 
 ## Try The Demo
 
-The repo includes a fake SaaS example with sample analytics data:
+The repo includes a fake SaaS example with sample analytics data and a generated homepage visual:
+
+<p align="center">
+  <img src="examples/demo-saas/assets/changelogpilot-homepage-section.jpg" alt="Generated ChangelogPilot homepage section showing merged pull requests, issues, and shipped features becoming a review-ready customer changelog." width="100%">
+</p>
 
 ```bash
 cp examples/demo-saas/brief.md brief.md
@@ -129,7 +157,9 @@ cp examples/demo-saas/final_variants.md final_variants.md
 cp -R examples/demo-saas/data data
 ```
 
-Then run the quick-start prompt above. The demo is intentionally fake; replace it with your own product, control copy, events, and data commands before making real decisions.
+See `examples/demo-saas/README.md` for the fake product context. Then run the quick-start prompt above.
+
+The demo is intentionally fake; replace it with your own product, control copy, events, and data commands before making real decisions.
 
 ## Good First Targets
 

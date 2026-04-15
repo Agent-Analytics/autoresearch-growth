@@ -8,6 +8,7 @@ This is fake demo data for a fictional product. Replace it before running a real
 - Surface: marketing landing-page hero
 - Public URL: `https://example.invalid/`
 - Local source file or copy source: `src/pages/home.tsx`
+- Visual reference: `examples/demo-saas/assets/changelogpilot-homepage-section.jpg`
 - Primary metric: `trial_started`
 - Proxy metric: `hero_cta_click`
 - Guardrail metrics: bounce rate, scroll depth, time on page, page errors
