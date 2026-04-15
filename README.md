@@ -34,6 +34,18 @@ This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresear
 Read program.md and run the growth loop. Use brief.md as the source of truth. Produce final_variants.md with two variants for review.
 ```
 
+## Try The Demo
+
+The repo includes a fake SaaS example with sample analytics data:
+
+```bash
+cp examples/demo-saas/brief.md brief.md
+cp examples/demo-saas/results.tsv results.tsv
+cp examples/demo-saas/final_variants.md final_variants.md
+```
+
+Then run the quick-start prompt above. The demo is intentionally fake; replace it with your own product, control copy, events, and data commands before making real decisions.
+
 ## Good First Targets
 
 - Landing-page hero copy.
