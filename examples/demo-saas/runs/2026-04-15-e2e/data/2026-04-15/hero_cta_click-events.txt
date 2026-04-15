@@ -1,0 +1,13 @@
+Agent Analytics events for changelogpilot
+Event: hero_cta_click
+Days: 7
+Limit: 50
+
+timestamp	path	referrer	device	country
+2026-04-15T08:14:09Z	/	https://news.ycombinator.com	desktop	US
+2026-04-15T08:18:55Z	/	https://github.com	mobile	US
+2026-04-15T09:02:17Z	/	https://google.com	desktop	GB
+2026-04-15T09:31:42Z	/	https://linkedin.com	desktop	CA
+2026-04-15T10:44:28Z	/	direct	mobile	US
+
+Sample is truncated. Use aggregate counts in the brief rather than overfitting to individual rows.

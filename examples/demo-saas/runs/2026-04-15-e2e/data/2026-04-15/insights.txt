@@ -1,0 +1,16 @@
+Agent Analytics insights for changelogpilot
+Period: last 7 days
+
+Sessions: 1,410
+Unique visitors: 1,130
+Events: 4,820
+Trend: sessions down 6% versus previous period
+
+Notable signals:
+- homepage bounce is high at 71%
+- median time on page is 22s
+- 75% scroll depth reached by 18% of sessions
+- mobile bounce is worse than desktop
+
+Interpretation:
+Visitors are deciding quickly. The hero needs to make the weekly release-note pain and the review-before-publish workflow clear above the fold.

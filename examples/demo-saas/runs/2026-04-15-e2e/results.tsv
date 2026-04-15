@@ -1,0 +1,6 @@
+round	candidate_a	candidate_b	candidate_ab	winner	borda_a	borda_b	borda_ab	status	rationale
+1	Turn PRs into changelogs	Release notes from shipped work	Weekly changelogs from PRs	AB	3	2	6	keep	AB named the weekly customer facing job and reduced generic AI writing language
+2	Weekly changelogs from PRs	Stop shipping silently	Ship weekly without late notes	AB	2	4	6	keep	AB made the pain immediate while preserving review before publish safety
+3	Ship weekly without late notes	Customer ready changelogs from GitHub	Draft changelogs from PR context	B	1	6	2	keep	B was most specific to the source material and easiest to understand above the fold
+4	Customer ready changelogs from GitHub	Review ready release notes	Review ready changelogs from PRs	AB	3	2	6	keep	AB kept GitHub specificity and made human review explicit
+5	Review ready changelogs from PRs	Turn merged PRs into customer updates	Customer updates from merged PRs	B	2	6	1	keep	B had the clearest trial intent and strongest customer facing differentiation
