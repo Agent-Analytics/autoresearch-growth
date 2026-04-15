@@ -102,6 +102,8 @@ RUN_DATE=2026-04-15
 
 mkdir -p "data/$RUN_DATE"
 
+# Keep collecting the full snapshot even if one analytics command fails.
+# Failed commands write their error output and exit code into the saved file.
 run_snapshot_command() {
   output_file="$1"
   shift
