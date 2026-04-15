@@ -2,6 +2,11 @@
 
 You are running an instruction-driven growth loop. Your job is to produce two high-quality variants that can be tested against the current control for the project described in `brief.md`.
 
+This is a loop on top of a loop:
+
+- Inner autoresearch loop: generate, critique, synthesize, and blind-rank variants.
+- Outer experiment loop: human review, ship approved variants, wait for real behavior, then feed measured evidence into the next run.
+
 Do not change product code while running the loop. Produce reviewable copy artifacts first.
 
 ## Setup
@@ -158,7 +163,15 @@ guardrails: bounce rate, scroll depth, time on page, errors, performance
 
 The proxy can help pick candidates faster. The primary event decides whether a shipped experiment wins.
 
-## Loop
+Treat the run's fitness function as:
+
+```text
+primary event + proxy event + guardrails + product-truth constraints
+```
+
+Do not optimize for the proxy alone. A candidate that increases clicks while weakening signup intent, page quality, performance, or product truth should lose.
+
+## Inner Autoresearch Loop
 
 Run at least 5 rounds unless `brief.md` specifies a different count.
 
@@ -238,3 +251,18 @@ Write `final_variants.md` with:
 - data limitations
 
 End with a clear note that the experiment has not been wired yet.
+
+## Outer Experiment Loop
+
+Do not run this phase unless a human explicitly approves implementation.
+
+After approval:
+
+1. Use the current surface as the control.
+2. Test the two approved candidates against it.
+3. Measure the primary event, proxy event, and guardrails.
+4. Wait for the requested experiment window.
+5. Pull the measured result into the next analytics snapshot and brief.
+6. Start the next inner autoresearch loop from that evidence.
+
+The waiting period is not a bug. It is the reality check.

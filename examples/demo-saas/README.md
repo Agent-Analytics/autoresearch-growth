@@ -23,6 +23,16 @@ The demo gives an agent enough context to practice the loop:
 - empty output templates in `results.tsv` and `final_variants.md`
 - one completed example run in `runs/2026-04-15-e2e/`
 
+## Completed Example Run
+
+Read this first if you want to see the expected output shape:
+
+- [`runs/2026-04-15-e2e/README.md`](runs/2026-04-15-e2e/README.md) - run report
+- [`runs/2026-04-15-e2e/results.tsv`](runs/2026-04-15-e2e/results.tsv) - five judged rounds
+- [`runs/2026-04-15-e2e/final_variants.md`](runs/2026-04-15-e2e/final_variants.md) - two review-ready winners
+
+The completed run shows the important pattern: the LLM loop produces candidate variants, but the next loop should start from measured experiment evidence.
+
 ## How To Use It
 
 From the repo root:

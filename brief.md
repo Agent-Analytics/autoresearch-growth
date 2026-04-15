@@ -2,6 +2,11 @@
 
 Copy this template into a project-specific brief before running the loop.
 
+This template is for a loop on top of a loop:
+
+- Inner autoresearch loop: generate, critique, synthesize, and blind-rank variants.
+- Outer experiment loop: human review, ship approved variants, wait for real behavior, then feed measured evidence into the next run.
+
 ## Target
 
 - Project:
@@ -21,6 +26,26 @@ variants: control,candidate_1,candidate_2
 goal: <primary_event>
 proxy: <proxy_event>
 ```
+
+## Fitness Function
+
+Define what "better" means for this run.
+
+```text
+primary_event:
+proxy_event:
+guardrails:
+product_truth_constraints:
+```
+
+Use this shape:
+
+- Primary event: the real conversion goal.
+- Proxy event: the faster signal that helps compare candidates.
+- Guardrails: signals the loop must not damage.
+- Product truth constraints: claims and positioning that must stay true.
+
+Do not let the loop optimize the proxy at the expense of the primary event, page quality, signup quality, or product truth.
 
 ## Product Truth
 

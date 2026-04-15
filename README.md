@@ -3,10 +3,12 @@
 Autoresearch-style growth loops for landing pages, onboarding copy, pricing pages, and experiment candidates.
 
 <p align="center">
-  <img src="assets/autoresearch-growth-loop-diagram.jpg" alt="Autoresearch growth loop: data brief, candidate generation, critique, synthesis, blind judging, A/B test, and measured results flowing into the next run." width="100%">
+  <img src="assets/autoresearch-outer-evidence-loop.jpg" alt="Outer autoresearch loop: five internal rounds produce two variants, a human reviews them, an experiment ships, Agent Analytics measures signup and CTA behavior, and the evidence snapshot feeds the next run." width="100%">
 </p>
 
-This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresearch), adapted for growth work. A coding agent reads `program.md`, studies your product brief and analytics snapshot, runs critique/revision/judging rounds, then outputs two distinct variants ready to test against the current control.
+This is a fork of [karpathy/autoresearch](https://github.com/karpathy/autoresearch), adapted for growth work. The idea is a loop on top of the loop: use autoresearch to generate and judge candidates quickly, then use real experiment data to decide what the next autoresearch run should learn from.
+
+A coding agent reads `program.md`, studies your product brief and analytics snapshot, runs critique/revision/judging rounds, then outputs two distinct variants ready to test against the current control.
 
 Use any analytics source you want: Agent Analytics, PostHog, GA4, Mixpanel, SQL, CSV exports, product logs, or a hand-written data brief. The loop only needs a clear surface, current control, primary metric, proxy metric, guardrails, and the freshest evidence you can give it.
 
@@ -14,18 +16,52 @@ It works especially well with [Agent Analytics](https://agentanalytics.sh) becau
 
 This repo is a community template. Bring your own product, your own data, and your own judgment.
 
+## Why This Is Different
+
+Most autoresearch loops optimize against an internal score. This template uses two layers:
+
+1. the inner autoresearch loop for fast candidate generation
+2. the outer experiment loop where signup, CTA, and guardrail data feed the next run
+
+LLM judges are a filter. User behavior is the judge.
+
+The waiting period is not a bug. It is the reality check.
+
+<p align="center">
+  <img src="assets/autoresearch-weekly-outer-loop.jpg" alt="Weekly outer loop: several LLM-generated experiments run in parallel, then a Friday evidence packet feeds the next loop." width="100%">
+</p>
+
+At small scale, wait 24 or 48 hours for real behavior. At bigger scale, run several experiments in parallel and review the week as a batch: what shipped, what won, what lost, what guardrails moved, and what the next loop should try.
+
+The growth fitness function is:
+
+```text
+primary event + proxy event + guardrails + product-truth constraints
+```
+
+The proxy helps the loop move quickly. The primary event decides whether a shipped experiment actually won. Guardrails keep the loop from buying more clicks by damaging bounce, scroll depth, performance, signup quality, or the product truth.
+
 ## The Loop
 
-1. Define the surface, audience, control, and metric.
+### Inner Autoresearch Loop
+
+1. Define the surface, audience, control, and fitness function.
 2. Pull the latest analytics data for that surface.
-3. Generate a candidate.
+3. Generate candidate A.
 4. Critique it for genericness, drift, and weak conversion intent.
-5. Write a fresh alternative from the critique.
-6. Synthesize the strongest parts.
-7. Blind-rank the options with Borda scoring.
+5. Write candidate B from the critique.
+6. Synthesize the strongest parts into AB.
+7. Blind-rank A, B, and AB with Borda scoring.
 8. Repeat for several rounds.
-9. Ship the two strongest distinct variants into an A/B test.
-10. Feed experiment data into the next run.
+9. Output two strong variants for review.
+
+### Outer Experiment Loop
+
+1. Let a human review product truth and risk.
+2. Ship the approved variants into an A/B test.
+3. Wait for real behavior.
+4. Pull signup, CTA, and guardrail data back into the next brief.
+5. Run the inner loop again from evidence.
 
 ## Files
 
@@ -161,6 +197,14 @@ cp -R examples/demo-saas/data data
 
 See `examples/demo-saas/README.md` for the fake product context. Then run the quick-start prompt above.
 
+There is also a completed example run:
+
+- [`examples/demo-saas/runs/2026-04-15-e2e/README.md`](examples/demo-saas/runs/2026-04-15-e2e/README.md) - run report
+- [`examples/demo-saas/runs/2026-04-15-e2e/results.tsv`](examples/demo-saas/runs/2026-04-15-e2e/results.tsv) - five judged rounds
+- [`examples/demo-saas/runs/2026-04-15-e2e/final_variants.md`](examples/demo-saas/runs/2026-04-15-e2e/final_variants.md) - two review-ready winners
+
+Read that first if you want to see what a finished loop should look like.
+
 The demo is intentionally fake; replace it with your own product, control copy, events, and data commands before making real decisions.
 
 ## Good First Targets
@@ -183,3 +227,12 @@ Examples:
 - Primary: `activation_completed`, proxy: `onboarding_step_completed`.
 
 The proxy helps move quickly. The primary event decides real winners.
+
+Treat this as the run's fitness function:
+
+```text
+primary_event: the real conversion goal
+proxy_event: the faster signal that helps compare candidates
+guardrails: signals the loop must not damage
+product_truth: claims and positioning constraints that must stay true
+```
