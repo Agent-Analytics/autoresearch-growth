@@ -92,7 +92,7 @@ Equivalent live commands for a real project would look like:
 
 ```bash
 # Run once if this machine or agent runtime is not logged in.
-npx @agent-analytics/cli@0.5.14 login
+npx --yes @agent-analytics/cli@0.5.25 login
 
 PROJECT_SLUG=changelogpilot
 PRIMARY_EVENT=trial_started
@@ -114,12 +114,12 @@ run_snapshot_command() {
   fi
 }
 
-run_snapshot_command "data/$RUN_DATE/insights.txt" npx @agent-analytics/cli@0.5.14 insights "$PROJECT_SLUG" --period 7d
-run_snapshot_command "data/$RUN_DATE/pages.txt" npx @agent-analytics/cli@0.5.14 pages "$PROJECT_SLUG" --since 7d
-run_snapshot_command "data/$RUN_DATE/funnel.txt" npx @agent-analytics/cli@0.5.14 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d
-run_snapshot_command "data/$RUN_DATE/${PROXY_EVENT}-events.txt" npx @agent-analytics/cli@0.5.14 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50
-run_snapshot_command "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt" npx @agent-analytics/cli@0.5.14 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50
-run_snapshot_command "data/$RUN_DATE/experiments.txt" npx @agent-analytics/cli@0.5.14 experiments list "$PROJECT_SLUG"
+run_snapshot_command "data/$RUN_DATE/insights.txt" npx --yes @agent-analytics/cli@0.5.25 insights "$PROJECT_SLUG" --period 7d
+run_snapshot_command "data/$RUN_DATE/pages.txt" npx --yes @agent-analytics/cli@0.5.25 pages "$PROJECT_SLUG" --since 7d
+run_snapshot_command "data/$RUN_DATE/funnel.txt" npx --yes @agent-analytics/cli@0.5.25 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d
+run_snapshot_command "data/$RUN_DATE/${PROXY_EVENT}-events.txt" npx --yes @agent-analytics/cli@0.5.25 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50
+run_snapshot_command "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt" npx --yes @agent-analytics/cli@0.5.25 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50
+run_snapshot_command "data/$RUN_DATE/experiments.txt" npx --yes @agent-analytics/cli@0.5.25 experiments list "$PROJECT_SLUG"
 ```
 
 ## Live Data Snapshot
