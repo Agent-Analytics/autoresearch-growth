@@ -78,7 +78,7 @@ If the project uses Agent Analytics, the normal snapshot shape is:
 
 ```bash
 # Run once if this machine or agent runtime is not logged in.
-npx --yes @agent-analytics/cli@0.5.36 login
+npx --yes @agent-analytics/cli@0.5.37 login
 
 PROJECT_SLUG=my-site
 PRIMARY_EVENT=signup
@@ -100,12 +100,12 @@ run_snapshot_command() {
   fi
 }
 
-run_snapshot_command "data/$RUN_DATE/insights.txt" npx --yes @agent-analytics/cli@0.5.36 insights "$PROJECT_SLUG" --period 7d
-run_snapshot_command "data/$RUN_DATE/pages.txt" npx --yes @agent-analytics/cli@0.5.36 pages "$PROJECT_SLUG" --since 7d
-run_snapshot_command "data/$RUN_DATE/funnel.txt" npx --yes @agent-analytics/cli@0.5.36 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d
-run_snapshot_command "data/$RUN_DATE/${PROXY_EVENT}-events.txt" npx --yes @agent-analytics/cli@0.5.36 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50
-run_snapshot_command "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt" npx --yes @agent-analytics/cli@0.5.36 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50
-run_snapshot_command "data/$RUN_DATE/experiments.txt" npx --yes @agent-analytics/cli@0.5.36 experiments list "$PROJECT_SLUG"
+run_snapshot_command "data/$RUN_DATE/insights.txt" npx --yes @agent-analytics/cli@0.5.37 insights "$PROJECT_SLUG" --period 7d
+run_snapshot_command "data/$RUN_DATE/pages.txt" npx --yes @agent-analytics/cli@0.5.37 pages "$PROJECT_SLUG" --since 7d
+run_snapshot_command "data/$RUN_DATE/funnel.txt" npx --yes @agent-analytics/cli@0.5.37 funnel "$PROJECT_SLUG" --steps "page_view,$PROXY_EVENT,$PRIMARY_EVENT" --since 7d
+run_snapshot_command "data/$RUN_DATE/${PROXY_EVENT}-events.txt" npx --yes @agent-analytics/cli@0.5.37 events "$PROJECT_SLUG" --event "$PROXY_EVENT" --days 7 --limit 50
+run_snapshot_command "data/$RUN_DATE/${PRIMARY_EVENT}-events.txt" npx --yes @agent-analytics/cli@0.5.37 events "$PROJECT_SLUG" --event "$PRIMARY_EVENT" --days 7 --limit 50
+run_snapshot_command "data/$RUN_DATE/experiments.txt" npx --yes @agent-analytics/cli@0.5.37 experiments list "$PROJECT_SLUG"
 ```
 
 Read the snapshot files, then summarize the useful signals in the `Live Data Snapshot` section of `brief.md` or in scratch notes before starting round 1. The snapshot is the input evidence. `results.tsv` is the round log created by this loop after judging.
